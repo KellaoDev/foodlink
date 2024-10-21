@@ -36,12 +36,24 @@ public class UserService  {
             throw new IllegalArgumentException("CNPJ não pode ser nulo ou vazio");
         }
 
+        if (userDto.getCnpj().length() != 15) {
+            throw new IllegalArgumentException("CNPJ deve conter 14 dígitos.");
+        }
+
         if (userDto.getUsername() == null || userDto.getUsername().isEmpty()) {
             throw new IllegalArgumentException("Nome de usuário não pode ser nulo ou vazio");
         }
 
+        if (userDto.getUsername().length() < 10) {
+            throw new IllegalArgumentException("Nome de usuário inválido!");
+        }
+
         if (userDto.getPassword() == null || userDto.getPassword().isEmpty()) {
             throw new IllegalArgumentException("Senha não pode ser nula ou vazia");
+        }
+
+        if (userDto.getPassword().length() < 8) {
+            throw new IllegalArgumentException("A senha deve ter pelo menos 8 caracteres.");
         }
 
         if (userDto.getConfirmPassword() == null || userDto.getConfirmPassword().isEmpty()) {

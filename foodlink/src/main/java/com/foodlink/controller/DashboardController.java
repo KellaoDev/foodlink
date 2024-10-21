@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 
 @Controller
-@RequestMapping("/menu")
-public class MenuController {
+@RequestMapping("/dashboard")
+public class DashboardController {
 
-    @GetMapping("/painel")
+    @GetMapping
     public String exibirMenu(Model model, Principal principal) {
 
         if (principal != null) {

@@ -1,21 +1,41 @@
 package com.foodlink.controller;
 
+import com.foodlink.entity.DonationEntity;
+import com.foodlink.service.DonationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/restaurante")
+@RequestMapping("/restaurant")
 public class RestaurantController {
 
-    @GetMapping("/criar-doacoes")
+    @Autowired
+    private DonationService donationService;
+
+    @GetMapping("/donation")
     public String getRestaurants(Model model) {
+        model.addAttribute("donation", new DonationEntity());
         return "/restaurant/createDonations";
     }
 
-    @GetMapping("/minhas-doacoes-realizadas")
+    @PostMapping("/submit-donation")
+    public String saveDonation(@ModelAttribute("donation") DonationEntity donation) {
+        donationService.saveDonation(donation);
+        return "redirect:/dashboard";
+    }
+
+    @GetMapping("/mydonations")
     public String getMyDonationsCarriedOut(Model model) {
+        model.addAttribute("donation", donationService.getAllDonations());
         return "/restaurant/donationsCarriedOut";
+    }
+
+    @GetMapping("/details/{id}")
+    public String getMyDonationsCarriedOut(@PathVariable Long id, Model model) {
+        DonationEntity donation = donationService.getDonationById(id);
+        model.addAttribute("donation", donation);
+        return "/restaurant/donationsDetails";
     }
 }

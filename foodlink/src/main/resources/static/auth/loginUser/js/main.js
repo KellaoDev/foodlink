@@ -1,57 +1,81 @@
+function formatCNPJ(cnpjInput) {
+    let cnpj = cnpjInput.value.replace(/\D/g, '');
 
-(function ($) {
-    "use strict";
-
-    
-    /*==================================================================
-    [ Validate ]*/
-    var input = $('.validate-input .input100');
-
-    $('.validate-form').on('submit',function(){
-        var check = true;
-
-        for(var i=0; i<input.length; i++) {
-            if(validate(input[i]) == false){
-                showValidate(input[i]);
-                check=false;
-            }
-        }
-
-        return check;
-    });
-
-
-    $('.validate-form .input100').each(function(){
-        $(this).focus(function(){
-           hideValidate(this);
-        });
-    });
-
-    function validate (input) {
-        if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
-            if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
-                return false;
-            }
-        }
-        else {
-            if($(input).val().trim() == ''){
-                return false;
-            }
-        }
+    if (cnpj.length > 14) {
+        cnpj = cnpj.slice(0, 14);
     }
 
-    function showValidate(input) {
-        var thisAlert = $(input).parent();
-
-        $(thisAlert).addClass('alert-validate');
+    if (cnpj.length <= 14) {
+        cnpj = cnpj.replace(/^(\d{2})(\d)/, '$1.$2'); // 00.00
+        cnpj = cnpj.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3'); // 00.000.00
+        cnpj = cnpj.replace(/\.(\d{3})(\d)/, '.$1/$2'); // 00.000.000/0
+        cnpj = cnpj.replace(/(\d{4})(\d)/, '$1-$2'); // 00.000.000/0000-0
     }
 
-    function hideValidate(input) {
-        var thisAlert = $(input).parent();
+    cnpjInput.value = cnpj;
+}
 
-        $(thisAlert).removeClass('alert-validate');
+function checkCNPJ(cnpjInput) {
+    const cnpj = cnpjInput.value.replace(/\D/g, '');
+    const feedbackElement = document.getElementById('cnpjFeedback');
+
+    if (cnpj.length !== 14) {
+        feedbackElement.textContent = 'O CNPJ deve estar completamente preenchido com 14 dígitos.';
+    } else {
+        feedbackElement.textContent = ''; // Limpa a mensagem de feedback se o CNPJ estiver correto
     }
-    
-    
+}
 
-})(jQuery);
+function validatePassword(passwordInput) {
+    const password = passwordInput.value;
+    const feedbackElement = document.getElementById('error');
+    let feedbackMessage = '';
+
+    // Verificar comprimento mínimo
+    if (password.length < 8) {
+        feedbackMessage += 'A senha deve ter pelo menos 8 caracteres. ';
+    }
+
+    feedbackElement.textContent = feedbackMessage; // Exibir mensagem de erro
+}
+
+function clearFeedback(feedbackId) {
+    document.getElementById(feedbackId).textContent = ''; // Limpa a mensagem de feedback
+}
+
+function submitForm() {
+    const cnpjInput = document.getElementById('cnpj');
+    const cnpj = cnpjInput.value.replace(/\D/g, '');
+    const passwordInput = document.getElementById('password');
+    const password = passwordInput.value;
+    const errorFeedbackElement = document.getElementById('error');
+
+    // Limpa mensagens de erro antes da validação
+    errorFeedbackElement.textContent = '';
+    const cnpjFeedbackElement = document.getElementById('cnpjFeedback');
+    cnpjFeedbackElement.textContent = '';
+
+    // Verificar CNPJ
+    if (cnpj.length !== 14) {
+        cnpjFeedbackElement.textContent = 'Por favor, preencha o CNPJ corretamente antes de cadastrar.';
+        return false; // Impede o envio do formulário
+    }
+
+    // Verificar Senha
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumbers = /\d/.test(password);
+    const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    if (password.length < 8) {
+        errorFeedbackElement.textContent = 'A senha deve ter pelo menos 8 caracteres.';
+        return false; // Impede o envio do formulário
+    }
+    if (!hasUpperCase || !hasLowerCase || !hasNumbers || !hasSpecialChars) {
+        errorFeedbackElement.textContent = 'A senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.';
+        return false; // Impede o envio do formulário
+    }
+
+    // Aqui você pode adicionar a lógica para enviar o formulário
+    alert('Cadastro realizado com sucesso!'); // Exemplo de sucesso
+    // document.getElementById('registrationForm').submit(); // Se quiser submeter o formulário
+}

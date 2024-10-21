@@ -10,8 +10,7 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" th:href="@{/auth/loginUser/vendor/bootstrap/css/bootstrap.min.css}">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-          th:href="@{/auth/loginUser/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/auth/loginUser/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" th:href="@{/auth/loginUser/vendor/animate/animate.css}">
     <!--===============================================================================================-->
@@ -38,7 +37,7 @@
 					</span>
 
                 <div class="wrap-input100 validate-input" data-validate = "Valid cnpj is required: XX.XXX.XXX/0001-XX">
-                    <input class="input100" type="text" name="username" placeholder="Cnpj">
+                    <input class="input100" type="text" name="username" placeholder="Cnpj" maxlength="15" oninput="formatCNPJ(this)" onblur="checkCNPJ(this)" onfocus="clearFeedback('error')">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<i class="fa fa-envelope" aria-hidden="true"></i>

@@ -12,11 +12,11 @@
     <div class="container">
         <h1>Minhas Doações Realizadas</h1>
 
-        <table>
+        <table th:if="${donation} != null">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Prato</th>
-                    <th>ONG Destinatária</th>
                     <th>Quantidade</th>
                     <th>Data da Doação</th>
                     <th>Status</th>
@@ -24,26 +24,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Lasanha</td>
-                    <td>ONG Bom Prato</td>
-                    <td>20 porções</td>
-                    <td>20/09/2024</td>
-                    <td>Concluída</td>
-                    <td><a href="#" class="button">Detalhes</a></td>
-                </tr>
-                <tr>
-                    <td>Sopa de Legumes</td>
-                    <td>Casa de Apoio Esperança</td>
-                    <td>30 porções</td>
-                    <td>21/09/2024</td>
-                    <td>Pendente</td>
-                    <td><a href="#" class="button">Detalhes</a></td>
+                <tr th:each="donation : ${donation}">
+                    <td><span th:text="${donation.getId()}"></span></td>
+                    <td><span th:text="${donation.getFood}"></span></td>
+                    <td><span th:text="${donation.getQuantity}"></span></td>
+                    <td><span th:text="${donation.getDonationDate}"></span></td>
+                    <td><span th:text="${donation.getStatus}"></span></td>
+                    <td> <a th:href="@{/restaurant/details/{id}(id=${donation.id})}" class="button">Detalhes</a></td>
                 </tr>
             </tbody>
         </table>
 
-        <a th:href="@{/menu/painel}" class="button" style="color: #FFF; background-color: #6c757d; cursor: pointer">Voltar ao Painel</a>
+        <a th:href="@{/dashboard}" class="button" style="color: #FFF; background-color: #6c757d; cursor: pointer">Voltar ao Painel</a>
     </div>
 
 </body>

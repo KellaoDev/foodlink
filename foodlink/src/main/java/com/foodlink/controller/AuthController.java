@@ -36,7 +36,7 @@ public class AuthController {
     public String loginUser(@ModelAttribute("user") UserRegistrationDTO userDto, Model model) {
         try {
             userService.loginUser(userDto);
-            return "redirect:/menu/painel";
+            return "redirect:/dashboard";
         } catch (BadCredentialsException e) {
             model.addAttribute("error", e.getMessage());
             return "index";
