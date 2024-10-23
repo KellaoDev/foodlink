@@ -13,18 +13,16 @@
     <div>
         <p><strong>Nome do Restaurante:</strong> <span th:text="${donation.nameRestaurant}"></span> </p>
         <p><strong>Endereço:</strong> <span th:text="${donation.address}"></span></p>
-        <p><strong>Telefone de Contato:</strong> </p>
-        <p><strong>Email de Contato:</strong> </p>
-        <p><strong>Categoria de Alimento:</strong></p>
-        <p><strong>Descrição:</strong></p>
-        <p><strong>Quantidade:</strong> </p>
-        <p><strong>Data da Doação:</strong></p>
-        <p><strong>Hora da Doação:</strong></p>
-        <p><strong>Observação:</strong></p>
-        <p><strong>Método de Retirada:</strong></p>
-        <p><strong>Nome da Pessoa que Retira:</strong></p>
-        <p><strong>Telefone da Pessoa que Retira:</strong></p>
-        <p><strong>Termos Aceitos:</strong></p>
+        <p><strong>Telefone de Contato:</strong> <span th:text="${donation.phoneContact}"></span></p>
+        <p><strong>Email de Contato:</strong> <span th:text="${donation.emailContact}"></span></p>
+        <p><strong>Categoria de Alimento:</strong> <span th:text="${donation.foodCategory}"></span></p>
+        <p><strong>Descrição:</strong> <span th:text="${donation.description}"></span></p>
+        <p><strong>Quantidade:</strong> <span th:text="${donation.quantity}"></span></p>
+        <p><strong>Data da Doação:</strong> <span th:text="${donation.donationDate}"></span></p>
+        <p><strong>Hora da Doação:</strong> <span th:text="${donation.donationTime}"></span></p>
+        <p><strong>Observação:</strong> <span th:text="${donation.observation}"></span></p>
+        <p><strong>Método de Retirada:</strong> <span th:text="${donation.methodWithdrawal}"></span></p>
+        <p><strong>Termos Aceitos:</strong> <span th:text="${donation.terms ? 'Sim' : 'Não'}"></span></p>
     </div>
     <a th:href="@{/restaurant/mydonations}" class="button">Voltar</a>
 </div>

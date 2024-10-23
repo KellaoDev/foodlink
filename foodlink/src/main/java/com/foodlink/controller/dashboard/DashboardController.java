@@ -1,4 +1,4 @@
-package com.foodlink.controller;
+package com.foodlink.controller.dashboard;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

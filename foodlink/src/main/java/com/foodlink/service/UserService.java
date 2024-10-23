@@ -45,7 +45,7 @@ public class UserService  {
         }
 
         if (userDto.getUsername().length() < 10) {
-            throw new IllegalArgumentException("Nome de usuário inválido!");
+            throw new IllegalArgumentException("Nome de usuário precisa ter pelo menos 10 caracteres!");
         }
 
         if (userDto.getPassword() == null || userDto.getPassword().isEmpty()) {

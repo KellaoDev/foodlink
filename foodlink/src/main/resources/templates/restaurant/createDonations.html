@@ -44,7 +44,7 @@
             </div>
 
             <div class="form-group">
-                <label for="food_food">Food</label>
+                <label for="food_food">Comida</label>
                 <input type="text" id="food_food" name="food_food" required th:field="*{food}">
             </div>
 
@@ -85,10 +85,16 @@
             </div>
 
             <div class="form-group">
-                <label>
-                    <input type="checkbox" name="confirmation" required th:field="*{terms}">
+                <label for="confirmation">
+                    <input type="checkbox" id="confirmation" name="confirmation" required th:field="*{terms}">
                     Confirmo que as informações estão corretas e a doação está pronta.
+                    <br>
+                    <a th:href="@{/terms-of-use}" target="_blank">Leia os termos de uso</a>.
                 </label>
+            </div>
+
+            <div th:if="${error}" id="error" style="color: red;">
+                <p style="color: red;" th:text="${error}"></p>
             </div>
 
             <div class="form-group">

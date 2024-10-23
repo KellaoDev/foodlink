@@ -21,9 +21,14 @@ public class RestaurantController {
     }
 
     @PostMapping("/submit-donation")
-    public String saveDonation(@ModelAttribute("donation") DonationEntity donation) {
-        donationService.saveDonation(donation);
-        return "redirect:/dashboard";
+    public String saveDonation(@ModelAttribute("donation") DonationEntity donation, Model model) {
+        try {
+            donationService.saveDonation(donation);
+            return "redirect:/dashboard";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "/restaurant/createDonations";
+        }
     }
 
     @GetMapping("/mydonations")

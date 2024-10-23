@@ -31,7 +31,6 @@ function validatePassword(passwordInput) {
     const feedbackElement = document.getElementById('error');
     let feedbackMessage = '';
 
-    // Verificar comprimento mínimo
     if (password.length < 8) {
         feedbackMessage += 'A senha deve ter pelo menos 8 caracteres. ';
     }
@@ -41,41 +40,4 @@ function validatePassword(passwordInput) {
 
 function clearFeedback(feedbackId) {
     document.getElementById(feedbackId).textContent = ''; // Limpa a mensagem de feedback
-}
-
-function submitForm() {
-    const cnpjInput = document.getElementById('cnpj');
-    const cnpj = cnpjInput.value.replace(/\D/g, '');
-    const passwordInput = document.getElementById('password');
-    const password = passwordInput.value;
-    const errorFeedbackElement = document.getElementById('error');
-
-    // Limpa mensagens de erro antes da validação
-    errorFeedbackElement.textContent = '';
-    const cnpjFeedbackElement = document.getElementById('cnpjFeedback');
-    cnpjFeedbackElement.textContent = '';
-
-    // Verificar CNPJ
-    if (cnpj.length !== 14) {
-        cnpjFeedbackElement.textContent = 'Por favor, preencha o CNPJ corretamente antes de cadastrar.';
-        return false; // Impede o envio do formulário
-    }
-
-    // Verificar Senha
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasNumbers = /\d/.test(password);
-    const hasSpecialChars = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    if (password.length < 8) {
-        errorFeedbackElement.textContent = 'A senha deve ter pelo menos 8 caracteres.';
-        return false; // Impede o envio do formulário
-    }
-    if (!hasUpperCase || !hasLowerCase || !hasNumbers || !hasSpecialChars) {
-        errorFeedbackElement.textContent = 'A senha deve conter letras maiúsculas, minúsculas, números e caracteres especiais.';
-        return false; // Impede o envio do formulário
-    }
-
-    // Aqui você pode adicionar a lógica para enviar o formulário
-    alert('Cadastro realizado com sucesso!'); // Exemplo de sucesso
-    // document.getElementById('registrationForm').submit(); // Se quiser submeter o formulário
 }

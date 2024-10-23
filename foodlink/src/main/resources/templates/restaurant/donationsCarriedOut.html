@@ -26,10 +26,10 @@
             <tbody>
                 <tr th:each="donation : ${donation}">
                     <td><span th:text="${donation.getId()}"></span></td>
-                    <td><span th:text="${donation.getFood}"></span></td>
-                    <td><span th:text="${donation.getQuantity}"></span></td>
-                    <td><span th:text="${donation.getDonationDate}"></span></td>
-                    <td><span th:text="${donation.getStatus}"></span></td>
+                    <td><span th:text="${donation.getFood()}"></span></td>
+                    <td><span th:text="${donation.getQuantity()}"></span></td>
+                    <td><span th:text="${donation.getDonationDate()}"></span></td>
+                    <td><span th:text="${donation.getStatus()}"></span></td>
                     <td> <a th:href="@{/restaurant/details/{id}(id=${donation.id})}" class="button">Detalhes</a></td>
                 </tr>
             </tbody>
