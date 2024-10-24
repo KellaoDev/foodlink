@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DonationService {
@@ -61,11 +62,15 @@ public class DonationService {
     }
 
     public void acceptDonation(Long donationId) {
-        DonationEntity donation = donationRepository.findById(donationId)
-                .orElseThrow(() -> new IllegalArgumentException("Doação não encontrada com id: " + donationId));
+        Optional<DonationEntity> optionalDonation = donationRepository.findById(donationId);
 
-        donation.setStatus(true);
-        donationRepository.save(donation);
+        if (optionalDonation.isPresent()) {
+            DonationEntity donation = optionalDonation.get();
+            donation.setStatus(true);  // Apenas altera o status para true
+            donationRepository.save(donation);  // Salva a alteração no banco
+        } else {
+            throw new IllegalArgumentException("Doação com ID " + donationId + " não encontrada.");
+        }
     }
 
     public List<DonationEntity> getAllDonations() {
@@ -76,11 +81,7 @@ public class DonationService {
         return donationRepository.findById(id).get();
     }
 
-    public List<DonationEntity> getAcceptDonationsForOng() {
-        return donationRepository.findByStatus(true);
-    }
-
     public List<DonationEntity> getAvailableDonations() {
-        return donationRepository.findByStatus(false);
+        return donationRepository.findByStatusFalse();
     }
 }

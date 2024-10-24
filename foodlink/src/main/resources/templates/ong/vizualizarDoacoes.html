@@ -10,21 +10,30 @@
 <body>
 
     <div class="container">
-        <h1>Doações Disponíveis</h1>
-    <form th:action="@{/ong/accept/{id}(id=${donation.id})}">
-        <div class="donation-card" th:each="donation : ${donation}">
-            <h2>Prato Principal: <span th:text="${donation.getId()}"></span></h2>
-            <p><strong>Restaurante:</strong> <span th:text="${donation.getNameRestaurant()}"></span></p>
-            <p><strong>Quantidade:</strong> <span th:text="${donation.getQuantity()}"></span></p>
-            <p><strong>Data Disponível:</strong> <span th:text="${donation.getDonationDate()}"></span></p>
-            <p><strong>Horário da Doação:</strong> <span th:text="${donation.getDonationTime()}"></span></p>
-            <div class="details">
-                <p><strong>Descrição:</strong> <span th:text="${donation.getDescription()}"></span></p>
-                <p><strong>Observações:</strong> <span th:text="${donation.getObservation()}"></span></p>
+    <h1>Doações Disponíveis</h1>
+
+    <div th:if="${donation != null and !donation.isEmpty()}">
+        <form th:each="donation : ${donation}" th:action="@{/ong/accept}" method="post">
+            <div class="donation-card">
+                <h2>Prato Principal: <span th:text="${donation.food}"></span></h2>
+                <p><strong>Restaurante:</strong> <span th:text="${donation.nameRestaurant}"></span></p>
+                <p><strong>Quantidade:</strong> <span th:text="${donation.quantity}"></span></p>
+                <p><strong>Data Disponível:</strong> <span th:text="${donation.donationDate}"></span></p>
+                <p><strong>Horário da Doação:</strong> <span th:text="${donation.donationTime}"></span></p>
+                <p><strong>Descrição:</strong> <span th:text="${donation.description}"></span></p>
+                <p><strong>Observações:</strong> <span th:text="${donation.observation}"></span></p>
+
+                <input type="hidden" name="donationId" th:value="${donation.id}"/>
+                <button type="submit" class="button">Aceitar Doação</button>
             </div>
-            <a th:href="@{/ong/aceitar-doacao/{id}(id=${donation.id})}" class="button" type="submit">Aceitar Doação</a>
+        </form>
+    </div>
+
+        <div th:if="${donation == null or donation.isEmpty()}">
+            <p>Nenhuma doação disponível no momento.</p>
         </div>
-    </form>
 
         <a th:href="@{/dashboard}" class="button" style="color: #FFF; background-color: #6c757d; cursor: pointer">Voltar ao Painel</a>
+
     </div>
+</body>

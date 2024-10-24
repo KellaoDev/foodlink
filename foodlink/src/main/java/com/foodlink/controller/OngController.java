@@ -5,10 +5,7 @@ import com.foodlink.service.DonationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,14 +18,14 @@ public class OngController {
 
     @GetMapping("/vizualizar-doacoes")
     public String getMyDonationsCarriedOut(Model model) {
-        List<DonationEntity> donations = donationService.getAvailableDonations();
-        model.addAttribute("donation", donations);
+        List<DonationEntity> availableDonations = donationService.getAvailableDonations();
+        model.addAttribute("donation", availableDonations);
         return "/ong/vizualizarDoacoes";
     }
 
-    @PostMapping("/accept/{id}")
-    public String acceptDonation(Model model, @PathVariable Long id) {
-        donationService.acceptDonation(id);
+    @PostMapping("/accept")
+    public String acceptDonation(@RequestParam("donationId") Long donationId) {
+        donationService.acceptDonation(donationId);
         return "redirect:/ong/vizualizar-doacoes";
     }
 
