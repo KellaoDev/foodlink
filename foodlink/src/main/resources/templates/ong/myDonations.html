@@ -10,13 +10,14 @@
 <body>
 
     <div class="container">
-        <h1>Minhas Doações Recebidas</h1>
+        <h1>Minhas Doações Aceitas</h1>
 
-        <table>
+        <table th:if="${donation} != null">
             <thead>
                 <tr>
-                    <th>Prato</th>
+                    <th>Id</th>
                     <th>Restaurante</th>
+                    <th>Prato</th>
                     <th>Quantidade</th>
                     <th>Data Recebida</th>
                     <th>Observações</th>
@@ -24,21 +25,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Lasanha</td>
-                    <td>Restaurante Bella Italia</td>
-                    <td>20 porções</td>
-                    <td>20/09/2024</td>
-                    <td>Apenas consumo no mesmo dia.</td>
-                    <td><a href="#" class="button">Detalhes</a></td>
-                </tr>
-                <tr>
-                    <td>Pudim de Leite</td>
-                    <td>Restaurante Doce Vida</td>
-                    <td>15 unidades</td>
-                    <td>21/09/2024</td>
-                    <td>Deve ser consumido até o final do dia.</td>
-                    <td><a href="#" class="button">Detalhes</a></td>
+                <tr th:each="donation : ${donation}">
+                    <td><span th:text="${donation.id}"></span></td>
+                    <td><span th:text="${donation.nameRestaurant}"></span></td>
+                    <td><span th:text="${donation.food}"></span></td>
+                    <td><span th:text="${donation.quantity}"></span></td>
+                    <td><span th:text="${donation.donationDate}"></span></td>
+                    <td><span th:text="${donation.observation}"></span></td>
+                    <td> <a th:href="@{/ong/details/{id}(id=${donation.id})}" class="button">Detalhes</a></td>
                 </tr>
             </tbody>
         </table>

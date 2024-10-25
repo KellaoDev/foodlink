@@ -16,22 +16,31 @@ public class OngController {
     @Autowired
     private DonationService donationService;
 
-    @GetMapping("/vizualizar-doacoes")
+    @GetMapping("/viewdonations")
     public String getMyDonationsCarriedOut(Model model) {
         List<DonationEntity> availableDonations = donationService.getAvailableDonations();
         model.addAttribute("donation", availableDonations);
-        return "/ong/vizualizarDoacoes";
+        return "/ong/viewDonations";
     }
 
     @PostMapping("/accept")
     public String acceptDonation(@RequestParam("donationId") Long donationId) {
         donationService.acceptDonation(donationId);
-        return "redirect:/ong/vizualizar-doacoes";
+        return "redirect:/ong/viewDonations";
     }
 
-    @GetMapping("/minhas-doacoes")
+    @GetMapping("/mydonations")
     public String getMyDonations(Model model) {
-        return "/ong/minhasDoacoes";
+        List<DonationEntity> receiveDonations = donationService.getReceiveDonations();
+        model.addAttribute("donation", receiveDonations);
+        return "/ong/myDonations";
+    }
+
+    @GetMapping("/details/{id}")
+    public String getMyDonationsCarriedOut(@PathVariable Long id, Model model) {
+        DonationEntity donation = donationService.getDonationById(id);
+        model.addAttribute("donation", donation);
+        return "/donation/donationsDetails";
     }
 
 }

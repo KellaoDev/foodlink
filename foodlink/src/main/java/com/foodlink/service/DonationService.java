@@ -84,4 +84,8 @@ public class DonationService {
     public List<DonationEntity> getAvailableDonations() {
         return donationRepository.findByStatusFalse();
     }
+
+    public List<DonationEntity> getReceiveDonations() {
+        return donationRepository.findByStatusTrue();
+    }
 }

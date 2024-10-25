@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/restaurant")
 public class RestaurantController {
@@ -33,7 +35,8 @@ public class RestaurantController {
 
     @GetMapping("/mydonations")
     public String getMyDonationsCarriedOut(Model model) {
-        model.addAttribute("donation", donationService.getAllDonations());
+        List<DonationEntity> receiveDonations = donationService.getReceiveDonations();
+        model.addAttribute("donation", receiveDonations);
         return "/restaurant/donationsCarriedOut";
     }
 
@@ -41,6 +44,6 @@ public class RestaurantController {
     public String getMyDonationsCarriedOut(@PathVariable Long id, Model model) {
         DonationEntity donation = donationService.getDonationById(id);
         model.addAttribute("donation", donation);
-        return "/restaurant/donationsDetails";
+        return "/donation/donationsDetails";
     }
 }
