@@ -13,6 +13,9 @@ public class DonationService {
     @Autowired
     private DonationRepository donationRepository;
 
+    @Autowired
+    private DonationStatisticsService donationStatisticsService;
+
     public DonationEntity saveDonation(DonationEntity donation) {
         if (donation.getNameRestaurant() == null || donation.getNameRestaurant().isEmpty()) {
             throw new IllegalArgumentException("Nome de restaurante não pode ser nulo ou vazio");
@@ -66,8 +69,8 @@ public class DonationService {
 
         if (optionalDonation.isPresent()) {
             DonationEntity donation = optionalDonation.get();
-            donation.setStatus(true);  // Apenas altera o status para true
-            donationRepository.save(donation);  // Salva a alteração no banco
+            donation.setStatus(true);
+            donationRepository.save(donation);
         } else {
             throw new IllegalArgumentException("Doação com ID " + donationId + " não encontrada.");
         }
@@ -85,7 +88,18 @@ public class DonationService {
         return donationRepository.findByStatusFalse();
     }
 
-    public List<DonationEntity> getReceiveDonations() {
-        return donationRepository.findByStatusTrue();
+    public List<DonationEntity> getReceiveDonations() { return donationRepository.findByStatusTrue(); }
+
+    public int getTotalDonationsByRestaurant(String nameRestaurant) {
+        List<DonationEntity> donations = donationRepository.findByNameRestaurant(nameRestaurant);
+
+        int [] donationQuantities = donations.stream().mapToInt(DonationEntity::getQuantity).toArray();
+
+        return donationStatisticsService.getTotalDonations(donationQuantities);
     }
+
+    public List<DonationEntity> findByName(String name) {
+        return donationRepository.findByNameRestaurant(name);
+    }
+
 }

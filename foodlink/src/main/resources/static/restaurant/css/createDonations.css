@@ -142,6 +142,7 @@ input:focus {
     text-decoration: none;
     display: inline-block;
 }
+
 .button:hover {
     background-color: #6a85d6;
 }

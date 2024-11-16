@@ -21,7 +21,7 @@ public class CustomUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         //Só estou imprimindo a role para teste
-        System.out.println("Roles do usuário: " + userEntity.getRoles());
+        //System.out.println("Roles do usuário: " + userEntity.getRoles());
 
         return userEntity.getRoles()
                 .stream()

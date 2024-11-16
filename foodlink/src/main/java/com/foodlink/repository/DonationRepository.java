@@ -9,6 +9,10 @@ import java.util.List;
 @Repository
 public interface DonationRepository extends JpaRepository<DonationEntity, Long> {
 
-        List<DonationEntity> findByStatusFalse();
-        List<DonationEntity> findByStatusTrue();
+    List<DonationEntity> findByStatusFalse();
+
+    List<DonationEntity> findByStatusTrue();
+
+    List<DonationEntity> findByNameRestaurant(String nameRestaurant);
+
 }

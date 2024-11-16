@@ -9,36 +9,37 @@
 </head>
 <body>
 
-    <div class="container">
-        <h1>Minhas Doações Aceitas</h1>
+<div class="container">
+    <h1>Minhas Doações Aceitas</h1>
 
-        <table th:if="${donation} != null">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Restaurante</th>
-                    <th>Prato</th>
-                    <th>Quantidade</th>
-                    <th>Data Recebida</th>
-                    <th>Observações</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="donation : ${donation}">
-                    <td><span th:text="${donation.id}"></span></td>
-                    <td><span th:text="${donation.nameRestaurant}"></span></td>
-                    <td><span th:text="${donation.food}"></span></td>
-                    <td><span th:text="${donation.quantity}"></span></td>
-                    <td><span th:text="${donation.donationDate}"></span></td>
-                    <td><span th:text="${donation.observation}"></span></td>
-                    <td> <a th:href="@{/ong/details/{id}(id=${donation.id})}" class="button">Detalhes</a></td>
-                </tr>
-            </tbody>
-        </table>
+    <table th:if="${donation} != null">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Restaurante</th>
+            <th>Prato</th>
+            <th>Quantidade</th>
+            <th>Data Recebida</th>
+            <th>Observações</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="donation : ${donation}">
+            <td><span th:text="${donation.id}"></span></td>
+            <td><span th:text="${donation.nameRestaurant}"></span></td>
+            <td><span th:text="${donation.food}"></span></td>
+            <td><span th:text="${donation.quantity}"></span></td>
+            <td><span th:text="${donation.donationDate}"></span></td>
+            <td><span th:text="${donation.observation}"></span></td>
+            <td><a th:href="@{/ong/details/{id}(id=${donation.id})}" class="button">Detalhes</a></td>
+        </tr>
+        </tbody>
+    </table>
 
-        <a th:href="@{/dashboard}" class="button" style="color: #FFF; background-color: #6c757d; cursor: pointer">Voltar ao Painel</a>
-    </div>
+    <a th:href="@{/dashboard}" class="button" style="color: #FFF; background-color: #6c757d; cursor: pointer">Voltar ao
+        Painel</a>
+</div>
 
 </body>
 </html>

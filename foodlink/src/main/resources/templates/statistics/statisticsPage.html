@@ -1,0 +1,15 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Estatísticas de Doações</title>
+</head>
+<body>
+
+<h1>Estatísticas de Doações para o Restaurante: <span th:text="${nameRestaurant}"></span></h1>
+<p>Total de Doações Realizadas: <span th:text="${totalDonations}">0</span></p>
+
+<a href="/dashboard">Voltar para o Dashboard</a>
+</body>
+</html>

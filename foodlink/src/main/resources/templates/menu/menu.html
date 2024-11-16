@@ -14,6 +14,7 @@
     <a th:href="@{/dashboard}">Home</a>
     <a th:href="@{/restaurant/donation}" sec:authorize="hasRole('ROLE_RESTAURANTE')">Doar Alimentos</a>
     <a th:href="@{/ong/vizualizar-doacoes}" sec:authorize="hasRole('ROLE_ONG')">Visualizar Doações</a>
+    <a th:href="@{/dashboard/statistics/{nameRestaurant}}" sec:authorize="hasRole('ROLE_RESTAURANTE')">Informações das Doações</a>
     <a th:href="@{/logout}">Sair</a>
 </div>
 
@@ -32,7 +33,6 @@
                 <a th:href="@{/ong/mydonations}" class="button">Minhas Doações Aceitas</a>
             </div>
         </div>
-
         <div sec:authorize="hasRole('ROLE_RESTAURANTE')">
             <div class="buttonposition">
                 <a th:href="@{/restaurant/donation}" class="button">Criar Doação</a>

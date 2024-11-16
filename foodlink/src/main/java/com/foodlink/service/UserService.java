@@ -6,7 +6,6 @@ import com.foodlink.permissions.UserTypeEnum;
 import com.foodlink.repository.RoleRepository;
 import com.foodlink.repository.UserRepository;
 import com.foodlink.roles.Role;
-import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
-public class UserService  {
+public class UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -25,7 +24,7 @@ public class UserService  {
     private PasswordEncoder passwordEncoder;
 
     public void loginUser(UserRegistrationDTO userDto) {
-        if(!userExists(userDto.getCnpj())){
+        if (!userExists(userDto.getCnpj())) {
             throw new IllegalArgumentException("Username or password is incorrect");
         }
     }

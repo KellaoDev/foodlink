@@ -61,7 +61,7 @@ public class SecurityConfig {
                         .requestMatchers("/restaurant/**", "/static/restaurante/**").hasRole("RESTAURANTE")
                         .requestMatchers("/ong/**", "/static/ong/**").hasRole("ONG")
                         .requestMatchers("/static/donation/**").hasAnyRole("RESTAURANTE", "ONG")
-                        .requestMatchers("/dashboard").hasAnyRole("RESTAURANTE", "ONG")
+                        .requestMatchers("/dashboard/**").hasAnyRole("RESTAURANTE", "ONG")
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .anyRequest().authenticated()
                 )
