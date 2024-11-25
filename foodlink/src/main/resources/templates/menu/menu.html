@@ -14,15 +14,14 @@
     <a th:href="@{/dashboard}">Home</a>
     <a th:href="@{/restaurant/donation}" sec:authorize="hasRole('ROLE_RESTAURANTE')">Doar Alimentos</a>
     <a th:href="@{/ong/vizualizar-doacoes}" sec:authorize="hasRole('ROLE_ONG')">Visualizar Doações</a>
-    <a th:href="@{/dashboard/statistics/{nameRestaurant}}" sec:authorize="hasRole('ROLE_RESTAURANTE')">Informações das Doações</a>
+    <a th:href="@{/dashboard/statistics}" sec:authorize="hasRole('ROLE_RESTAURANTE')">Ver Estatísticas</a>
+
+
     <a th:href="@{/logout}">Sair</a>
 </div>
 
 <div class="container">
-    <h1>Bem-vindo ao Painel
-        <br>
-        <span sec:authentication="principal.username"></span>
-    </h1>
+    <h1>Bem-vindo ao Painel</h1>
 
     <div class="content">
         <h2>Escolha uma opção para continuar:</h2>

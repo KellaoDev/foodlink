@@ -35,8 +35,9 @@ public class CustomUserDetails implements UserDetails {
     }
 
     @Override
+    //cuidado!
     public String getUsername() {
-        return userEntity.getUsername();
+        return userEntity.getCnpj();
     }
 
     @Override

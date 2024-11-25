@@ -1,6 +1,7 @@
 package com.foodlink.repository;
 
 import com.foodlink.entity.DonationEntity;
+import com.foodlink.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,7 @@ public interface DonationRepository extends JpaRepository<DonationEntity, Long> 
 
     List<DonationEntity> findByStatusTrue();
 
-    List<DonationEntity> findByNameRestaurant(String nameRestaurant);
+    List<DonationEntity> findByUser(UserEntity user);
+
 
 }

@@ -64,4 +64,8 @@ public class DonationEntity {
     @Column
     private Boolean status = false;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
 }

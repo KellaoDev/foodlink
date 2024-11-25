@@ -1,10 +1,14 @@
 package com.foodlink.service;
 
 import com.foodlink.entity.DonationEntity;
+import com.foodlink.entity.UserEntity;
 import com.foodlink.repository.DonationRepository;
+import com.foodlink.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,9 +18,22 @@ public class DonationService {
     private DonationRepository donationRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private DonationStatisticsService donationStatisticsService;
 
-    public DonationEntity saveDonation(DonationEntity donation) {
+    public DonationEntity saveDonation(DonationEntity donation, Principal principal) {
+
+        if (principal == null) {
+            throw new IllegalArgumentException("Usuário não autenticado");
+        }
+
+        String username = principal.getName();
+        UserEntity user = findUserOrElseThrow(username);
+
+        donation.setUser(user);
+
         if (donation.getNameRestaurant() == null || donation.getNameRestaurant().isEmpty()) {
             throw new IllegalArgumentException("Nome de restaurante não pode ser nulo ou vazio");
         }
@@ -90,16 +107,20 @@ public class DonationService {
 
     public List<DonationEntity> getReceiveDonations() { return donationRepository.findByStatusTrue(); }
 
-    public int getTotalDonationsByRestaurant(String nameRestaurant) {
-        List<DonationEntity> donations = donationRepository.findByNameRestaurant(nameRestaurant);
+    public UserEntity findUserOrElseThrow(String username) {
+        UserEntity user = userRepository.findByCnpj(username);
+        if (user == null) {
+            throw new IllegalArgumentException("Usuário não encontrado");
+        }
+        return user;
+    }
+
+    public int getTotalDonationsByUser(UserEntity user) {
+        List<DonationEntity> donations = donationRepository.findByUser(user);
 
         int [] donationQuantities = donations.stream().mapToInt(DonationEntity::getQuantity).toArray();
 
         return donationStatisticsService.getTotalDonations(donationQuantities);
-    }
-
-    public List<DonationEntity> findByName(String name) {
-        return donationRepository.findByNameRestaurant(name);
     }
 
 }

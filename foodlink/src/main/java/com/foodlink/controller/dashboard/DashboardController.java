@@ -1,7 +1,9 @@
 package com.foodlink.controller.dashboard;
 
 import com.foodlink.entity.DonationEntity;
+import com.foodlink.entity.UserEntity;
 import com.foodlink.service.DonationService;
+import com.foodlink.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/dashboard")
@@ -22,31 +23,45 @@ public class DashboardController {
     @Autowired
     private DonationService donationService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping
     public String exibirMenu(Model model, Principal principal) {
 
         if (principal != null) {
-            model.addAttribute("name", principal.getName());
+            String cnpj = principal.getName();
+            UserEntity user = userService.findByCnpj(cnpj);
+
+            if (user != null) {
+                int totalDonations = donationService.getTotalDonationsByUser(user);
+                model.addAttribute("totalDonations", totalDonations);
+                model.addAttribute("user", user);
+            }
         } else {
             model.addAttribute("name", "Não autenticado");
         }
         return "menu/menu";
     }
 
-    @GetMapping("/statistics/{nameRestaurant}")
-    public String getDonationStatistics(@PathVariable("nameRestaurant") String nameRestaurant, Model model) {
 
-        List<DonationEntity> restaurantOp = donationService.findByName(nameRestaurant);
+    @GetMapping("/statistics")
+    public String getDonationStatistics(Model model, Principal principal) {
 
-        if(restaurantOp.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant not found");
+        if (principal == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuário não autenticado");
         }
 
-        DonationEntity donation = restaurantOp.get(0);
-        int totalDonations = donationService.getTotalDonationsByRestaurant(nameRestaurant);
+        String cnpj = principal.getName();
+        UserEntity user = userService.findByCnpj(cnpj);
 
-        model.addAttribute("restaurant", donation);
-        model.addAttribute("nameRestaurant", nameRestaurant);
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado");
+        }
+
+        int totalDonations = donationService.getTotalDonationsByUser(user);
+
+        model.addAttribute("user", user);
         model.addAttribute("totalDonations", totalDonations);
 
         return "statistics/statisticsPage";
