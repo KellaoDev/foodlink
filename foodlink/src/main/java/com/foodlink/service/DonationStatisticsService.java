@@ -17,5 +17,4 @@ public class DonationStatisticsService {
     }
 
     public native int getTotalDonations(int[] donationQuantities);
-
 }

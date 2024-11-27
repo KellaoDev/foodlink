@@ -3,13 +3,18 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estatísticas de Doações</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/menu/css/statistics.css}">
 </head>
 <body>
 
-<h1>Estatísticas de Doações para o Restaurante: <span th:text="${user.username}"></span></h1>
+<h1>Estatísticas do Restaurante</h1>
 <p>Total da Quantidade de Doações Realizadas: <span th:text="${totalDonations}">0</span></p>
 
-<a href="/dashboard">Voltar para o Dashboard</a>
+<div class="form-group">
+    <a th:href="@{/dashboard}" class="button" style="color: #FFF; background-color: #6c757d; cursor: pointer">Voltar
+        ao Painel</a>
+</div>
 </body>
 </html>

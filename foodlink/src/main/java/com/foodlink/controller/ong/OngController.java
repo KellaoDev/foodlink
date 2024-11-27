@@ -1,4 +1,4 @@
-package com.foodlink.controller;
+package com.foodlink.controller.ong;
 
 import com.foodlink.entity.DonationEntity;
 import com.foodlink.service.DonationService;
@@ -24,9 +24,11 @@ public class OngController {
     }
 
     @PostMapping("/accept")
-    public String acceptDonation(@RequestParam("donationId") Long donationId) {
+    public String acceptDonation(@RequestParam("donationId") Long donationId, Model model) {
         donationService.acceptDonation(donationId);
-        return "redirect:/ong/viewDonations";
+        List<DonationEntity> availableDonations = donationService.getAvailableDonations();
+        model.addAttribute("donation", availableDonations);
+        return "/ong/viewDonations";
     }
 
     @GetMapping("/mydonations")

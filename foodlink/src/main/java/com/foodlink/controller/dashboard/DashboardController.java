@@ -27,20 +27,7 @@ public class DashboardController {
     private UserService userService;
 
     @GetMapping
-    public String exibirMenu(Model model, Principal principal) {
-
-        if (principal != null) {
-            String cnpj = principal.getName();
-            UserEntity user = userService.findByCnpj(cnpj);
-
-            if (user != null) {
-                int totalDonations = donationService.getTotalDonationsByUser(user);
-                model.addAttribute("totalDonations", totalDonations);
-                model.addAttribute("user", user);
-            }
-        } else {
-            model.addAttribute("name", "Não autenticado");
-        }
+    public String exibirMenu() {
         return "menu/menu";
     }
 
@@ -61,8 +48,10 @@ public class DashboardController {
 
         int totalDonations = donationService.getTotalDonationsByUser(user);
 
+
         model.addAttribute("user", user);
         model.addAttribute("totalDonations", totalDonations);
+
 
         return "statistics/statisticsPage";
     }

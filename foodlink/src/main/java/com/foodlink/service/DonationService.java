@@ -5,7 +5,6 @@ import com.foodlink.entity.UserEntity;
 import com.foodlink.repository.DonationRepository;
 import com.foodlink.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;

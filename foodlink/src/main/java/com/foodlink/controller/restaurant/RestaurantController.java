@@ -1,4 +1,4 @@
-package com.foodlink.controller;
+package com.foodlink.controller.restaurant;
 
 import com.foodlink.entity.DonationEntity;
 import com.foodlink.entity.UserEntity;

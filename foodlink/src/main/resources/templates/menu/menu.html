@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" th:href="@{/menu/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/menu/css/styles.css}">
 
     <title>Painel de Navegação</title>
 </head>
@@ -13,7 +13,7 @@
 <div class="navbar">
     <a th:href="@{/dashboard}">Home</a>
     <a th:href="@{/restaurant/donation}" sec:authorize="hasRole('ROLE_RESTAURANTE')">Doar Alimentos</a>
-    <a th:href="@{/ong/vizualizar-doacoes}" sec:authorize="hasRole('ROLE_ONG')">Visualizar Doações</a>
+    <a th:href="@{/ong/viewdonations}" sec:authorize="hasRole('ROLE_ONG')">Visualizar Doações</a>
     <a th:href="@{/dashboard/statistics}" sec:authorize="hasRole('ROLE_RESTAURANTE')">Ver Estatísticas</a>
 
 
