@@ -9,7 +9,7 @@ FoodLink is an innovative platform that connects restaurants, markets and food s
 <div style="display: inline_block"><br/>
   
   ![Image](https://github.com/user-attachments/assets/613bd49c-7439-459c-94ef-4edca8861d08)
-  ![Image](https://github.com/user-attachments/assets/903dc928-efd2-4a6d-ae66-4390ad6c7060)
+  ![Image](https://github.com/user-attachments/assets/15beaa67-87b6-429a-bba3-a9557771c621)
   ![Image](https://github.com/user-attachments/assets/a8e070a7-0920-4844-bade-5370c876edfd)
   ![Image](https://github.com/user-attachments/assets/52cb3295-d5ba-4f67-bc6e-002ebb4f8aea)
 </div><br/>
