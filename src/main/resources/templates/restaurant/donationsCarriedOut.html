@@ -1,0 +1,43 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Minhas Doações Realizadas</title>
+    <link rel="stylesheet" th:href="@{/restaurant/css/donationsCarriedOut.css}" type="text/css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Minhas Doações Realizadas</h1>
+
+    <table th:if="${donation} != null">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Prato</th>
+            <th>Quantidade</th>
+            <th>Data da Doação</th>
+            <th>Status</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="donation : ${donation}">
+            <td><span th:text="${donation.getId()}"></span></td>
+            <td><span th:text="${donation.getFood()}"></span></td>
+            <td><span th:text="${donation.getQuantity()}"></span></td>
+            <td><span th:text="${donation.getDonationDate()}"></span></td>
+            <td><span th:text="${donation.getStatus() ? 'Sim' : 'Não'}"></span></td>
+            <td><a class="button" th:href="@{/restaurant/details/{id}(id=${donation.id})}">Detalhes</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="button" style="color: #FFF; background-color: #6c757d; cursor: pointer" th:href="@{/dashboard}">Voltar ao
+        Painel</a>
+</div>
+
+</body>
+</html>

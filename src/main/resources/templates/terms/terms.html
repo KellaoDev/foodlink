@@ -1,0 +1,55 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Termos de Uso - FoodLink</title>
+    <link rel="stylesheet" th:href="@{/terms/css/styles.css}" type="text/css">
+</head>
+<body>
+<div class="container">
+    <h1>Termos de Uso - FoodLink</h1>
+    <p>
+        Ao utilizar a plataforma FoodLink, os restaurantes concordam com os seguintes termos e condições relacionados às
+        doações de alimentos:
+    </p>
+
+    <h2>1. Concordância com a veracidade das informações</h2>
+    <p>
+        O restaurante garante que as informações fornecidas sobre os alimentos a serem doados, como a descrição,
+        quantidade e estado de conservação, são verdadeiras e precisas. Qualquer informação incorreta pode resultar em
+        responsabilidades civis.
+    </p>
+
+    <h2>2. Responsabilidade pelos alimentos doados</h2>
+    <p>
+        O restaurante é responsável por garantir que os alimentos doados estejam em condições adequadas de consumo e
+        dentro do prazo de validade. A ONG destinatária tem o direito de recusar qualquer doação que não atenda a essas
+        condições.
+    </p>
+
+    <h2>3. Política de retirada ou entrega</h2>
+    <p>
+        O método de retirada será previamente combinado entre o restaurante e a ONG. A responsabilidade pela retirada
+        dos alimentos é definida com base no que foi acordado entre as partes, e o restaurante deverá garantir que os
+        alimentos estejam disponíveis na data e hora estipuladas.
+    </p>
+
+    <h2>4. Isenção de responsabilidade da plataforma</h2>
+    <p>
+        A plataforma FoodLink atua apenas como intermediária, conectando restaurantes e ONGs. A FoodLink não se
+        responsabiliza pela qualidade dos alimentos doados, pelo cumprimento de horários ou por qualquer falha nas
+        comunicações entre as partes.
+    </p>
+
+    <h2>5. Concordância com os termos</h2>
+    <p>
+        Ao marcar a opção de confirmação no formulário de doação, o restaurante concorda que leu e aceitou todos os
+        termos aqui expostos.
+    </p>
+
+    <p><a th:href="@{/restaurant/donation}">Voltar ao site</a></p>
+</div>
+</body>
+</html>

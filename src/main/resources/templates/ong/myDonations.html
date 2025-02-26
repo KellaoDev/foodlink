@@ -1,0 +1,45 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Minhas Doações Recebidas</title>
+    <link rel="stylesheet" th:href="@{/ong/css/minhasDoacoes.css}" type="text/css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Minhas Doações Aceitas</h1>
+
+    <table th:if="${donation} != null">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Restaurante</th>
+            <th>Prato</th>
+            <th>Quantidade</th>
+            <th>Data Recebida</th>
+            <th>Observações</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="donation : ${donation}">
+            <td><span th:text="${donation.id}"></span></td>
+            <td><span th:text="${donation.nameRestaurant}"></span></td>
+            <td><span th:text="${donation.food}"></span></td>
+            <td><span th:text="${donation.quantity}"></span></td>
+            <td><span th:text="${donation.donationDate}"></span></td>
+            <td><span th:text="${donation.observation}"></span></td>
+            <td><a class="button" th:href="@{/ong/details/{id}(id=${donation.id})}">Detalhes</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="button" style="color: #FFF; background-color: #6c757d; cursor: pointer" th:href="@{/dashboard}">Voltar ao
+        Painel</a>
+</div>
+
+</body>
+</html>

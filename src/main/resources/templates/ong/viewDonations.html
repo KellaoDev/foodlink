@@ -1,0 +1,40 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" th:href="@{/ong/css/vizualizarDoacoes.css}" type="text/css">
+    <title>Doações Disponíveis</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>Doações Disponíveis</h1>
+
+    <div th:if="${donation != null and !donation.isEmpty()}">
+        <form method="post" th:action="@{/ong/accept}" th:each="donation : ${donation}">
+            <div class="donation-card">
+                <h2>Prato Principal: <span th:text="${donation.food}"></span></h2>
+                <p><strong>Restaurante:</strong> <span th:text="${donation.nameRestaurant}"></span></p>
+                <p><strong>Quantidade:</strong> <span th:text="${donation.quantity}"></span></p>
+                <p><strong>Data Disponível:</strong> <span th:text="${donation.donationDate}"></span></p>
+                <p><strong>Horário da Doação:</strong> <span th:text="${donation.donationTime}"></span></p>
+                <p><strong>Descrição:</strong> <span th:text="${donation.description}"></span></p>
+                <p><strong>Observações:</strong> <span th:text="${donation.observation}"></span></p>
+
+                <input name="donationId" th:value="${donation.id}" type="hidden"/>
+                <button class="button" type="submit">Aceitar Doação</button>
+            </div>
+        </form>
+    </div>
+
+    <div th:if="${donation == null or donation.isEmpty()}">
+        <p>Nenhuma doação disponível no momento.</p>
+    </div>
+
+    <a class="button" style="color: #FFF; background-color: #6c757d; cursor: pointer" th:href="@{/dashboard}">Voltar ao
+        Painel</a>
+
+</div>
+</body>

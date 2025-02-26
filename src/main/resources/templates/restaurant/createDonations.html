@@ -1,0 +1,110 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Formulário de Doação de Alimentos</title>
+    <link rel="stylesheet" th:href="@{/restaurant/css/createDonations.css}" type="text/css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Formulário de Doação de Alimentos</h1>
+    <form th:action="@{/restaurant/submit-donation}" th:method="post" th:object="${donation}">
+        <div class="form-group">
+            <label for="restaurant-name">Nome do Restaurante</label>
+            <input id="restaurant-name" name="restaurant_name" required th:field="*{nameRestaurant}" type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="restaurant-address">Endereço</label>
+            <input id="restaurant-address" name="restaurant_address" required th:field="*{address}" type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="restaurant-phone">Telefone de Contato</label>
+            <input id="restaurant-phone" name="restaurant_phone" required th:field="*{phoneContact}" type="tel">
+        </div>
+
+        <div class="form-group">
+            <label for="restaurant-email">Email de Contato</label>
+            <input id="restaurant-email" name="restaurant_email" required th:field="*{emailContact}" type="email">
+        </div>
+
+        <div class="form-group">
+            <label for="food-type">Tipo de Alimento</label>
+            <select id="food-type" name="food_type" required th:field="*{foodCategory}">
+                <option value="">Selecione</option>
+                <option th:each="category : ${T(com.foodlink.enumerated.FoodCategoryEnum).values()}"
+                        th:text="${#strings.capitalize(category.name().toLowerCase().replace('_', ' '))}"
+                        th:value="${category.name()}">
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="food_food">Comida</label>
+            <input id="food_food" name="food_food" required th:field="*{food}" type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="food-description">Descrição do Alimento</label>
+            <input id="food-description" name="food_description" required th:field="*{description}" type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="food-quantity">Quantidade</label>
+            <input id="food-quantity" name="food_quantity" required th:field="*{quantity}" type="number">
+        </div>
+
+        <div class="form-group">
+            <label for="availability-date">Data de Disponibilidade</label>
+            <input id="availability-date" name="availability_date" required th:field="*{donationDate}" type="date">
+        </div>
+
+        <div class="form-group">
+            <label for="availability-time">Horário de Disponibilidade</label>
+            <input id="availability-time" name="availability_time" required th:field="*{donationTime}" type="time">
+        </div>
+
+        <div class="form-group">
+            <label for="observations">Observações</label>
+            <textarea id="observations" name="observations" th:field="*{observation}"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="pickup-method">Método de Retirada</label>
+            <select id="pickup-method" name="pickup_method" required th:field="*{methodWithdrawal}">
+                <option value="">Selecione</option>
+                <option th:each="method : ${T(com.foodlink.enumerated.MethodWithdrawalEnum).values()}"
+                        th:text="${#strings.capitalize(method.name().toLowerCase().replace('_', ' '))}"
+                        th:value="${method.name()}">
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmation">
+                <input id="confirmation" name="confirmation" required th:field="*{terms}" type="checkbox">
+                Confirmo que as informações estão corretas e a doação está pronta.
+                <br>
+                <a target="_blank" th:href="@{/terms-of-use}">Leia os termos de uso</a>.
+            </label>
+        </div>
+
+        <div id="error" style="color: red;" th:if="${error}">
+            <p style="color: red;" th:text="${error}"></p>
+        </div>
+
+        <div class="form-group">
+            <a class="button" style="color: #FFF; background-color: #6c757d; cursor: pointer" th:href="@{/dashboard}">Voltar
+                ao Painel</a>
+            <button type="submit">Enviar Doação</button>
+        </div>
+    </form>
+
+</div>
+
+</body>
+</html>

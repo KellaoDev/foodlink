@@ -1,0 +1,37 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Minhas Doações Realizadas</title>
+    <link rel="stylesheet" th:href="@{/donation/css/donationsDetails.css}" type="text/css">
+</head>
+<body>
+<div class="container">
+    <h1>Detalhes da Doação</h1>
+    <div>
+        <p><strong>Nome do Restaurante:</strong> <span th:text="${donation.nameRestaurant}"></span></p>
+        <p><strong>Endereço:</strong> <span th:text="${donation.address}"></span></p>
+        <p><strong>Telefone de Contato:</strong> <span th:text="${donation.phoneContact}"></span></p>
+        <p><strong>Email de Contato:</strong> <span th:text="${donation.emailContact}"></span></p>
+        <p><strong>Categoria de Alimento:</strong> <span th:text="${donation.foodCategory}"></span></p>
+        <p><strong>Descrição:</strong> <span th:text="${donation.description}"></span></p>
+        <p><strong>Quantidade:</strong> <span th:text="${donation.quantity}"></span></p>
+        <p><strong>Data da Doação:</strong> <span th:text="${donation.donationDate}"></span></p>
+        <p><strong>Hora da Doação:</strong> <span th:text="${donation.donationTime}"></span></p>
+        <p><strong>Observação:</strong> <span th:text="${donation.observation}"></span></p>
+        <p><strong>Método de Retirada:</strong> <span th:text="${donation.methodWithdrawal}"></span></p>
+        <p><strong>Termos Aceitos:</strong> <span th:text="${donation.terms ? 'Sim' : 'Não'}"></span></p>
+    </div>
+    <div sec:authorize="hasRole('ROLE_ONG')">
+        <a class="button" th:href="@{/ong/mydonations}">Voltar</a>
+    </div>
+    <div sec:authorize="hasRole('ROLE_RESTAURANTE')">
+        <a class="button" th:href="@{/restaurant/mydonations}">Voltar</a>
+    </div>
+</div>
+</body>
+</html>

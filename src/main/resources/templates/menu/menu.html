@@ -1,0 +1,50 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" th:href="@{/menu/css/styles.css}" type="text/css">
+
+    <title>Painel de Navegação</title>
+</head>
+<body>
+<div class="navbar">
+    <a th:href="@{/dashboard}">Home</a>
+    <a sec:authorize="hasRole('ROLE_RESTAURANTE')" th:href="@{/restaurant/donation}">Doar Alimentos</a>
+    <a sec:authorize="hasRole('ROLE_ONG')" th:href="@{/ong/viewdonations}">Visualizar Doações</a>
+    <a sec:authorize="hasRole('ROLE_RESTAURANTE')" th:href="@{/dashboard/statistics}">Ver Estatísticas</a>
+
+
+    <a th:href="@{/logout}">Sair</a>
+</div>
+
+<div class="container">
+    <h1>Bem-vindo ao Painel</h1>
+
+    <div class="content">
+        <h2>Escolha uma opção para continuar:</h2>
+
+        <div sec:authorize="hasRole('ROLE_ONG')">
+            <div class="buttonposition">
+                <a class="button" th:href="@{/ong/viewdonations}">Visualizar Doações Disponíveis</a>
+                <a class="button" th:href="@{/ong/mydonations}">Minhas Doações Aceitas</a>
+            </div>
+        </div>
+        <div sec:authorize="hasRole('ROLE_RESTAURANTE')">
+            <div class="buttonposition">
+                <a class="button" th:href="@{/restaurant/donation}">Criar Doação</a>
+                <a class="button" th:href="@{/restaurant/mydonations}">Minhas Doações Realizadas</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <span id="hora"></span>
+</div>
+
+<script th:src="@{/menu/js/script.js}"></script>
+</body>
+</html>

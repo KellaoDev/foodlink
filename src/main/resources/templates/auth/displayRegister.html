@@ -1,0 +1,130 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cadastrar</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <!--===============================================================================================-->
+    <link rel="icon" th:href="@{/auth/registerUser/images/icons/favicon.ico}" type="image/png">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" th:href="@{/auth/registerUser/vendor/bootstrap/css/bootstrap.min.css}" type="text/css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" th:href="@{/auth/registerUser/fonts/font-awesome-4.7.0/css/font-awesome.min.css}"
+          type="text/css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" th:href="@{/auth/registerUser/vendor/animate/animate.css}" type="text/css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" th:href="@{/auth/registerUser/vendor/css-hamburgers/hamburgers.min.css}" type="text/css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" th:href="@{/auth/registerUser/vendor/select2/select2.min.css}" type="text/css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" th:href="@{/auth/registerUser/css/util.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/auth/registerUser/css/main.css}" type="text/css">
+    <!--===============================================================================================-->
+</head>
+
+<body>
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img alt="IMG" th:src="@{/auth/registerUser/images/Logo.jpeg}">
+            </div>
+
+            <form class="login100-form validate-form" th:action="@{/auth/register}" th:method="post"
+                  th:object="${user}">
+					<span class="login100-form-title">
+						Criar Conta
+					</span>
+
+                <div class="wrap-input100 validate-input"
+                     data-validate="Valid cnpj is required: XX.XXX.XXX/0001-XX">
+                    <input class="input100" maxlength="15" name="cnpj" onblur="checkCNPJ(this)" onfocus="clearFeedback('error')" oninput="formatCNPJ(this)"
+                           placeholder="Cnpj" th:field="*{cnpj}" type="text">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i aria-hidden="true" class="fa fa-envelope"></i>
+						</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid username">
+                    <input class="input100" maxlength="28" name="username" placeholder="Usuário" th:field="*{username}"
+                           type="text">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i aria-hidden="true" class="fa fa-user"></i>
+						</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input class="input100" id="password" name="password" onfocus="clearFeedback('error')" oninput="validatePassword(this)"
+                           placeholder="Senha" type="password">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i aria-hidden="true" class="fa fa-lock"></i>
+						</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input class="input100" id="password" name="confirmPassword" placeholder="Confirmar Senha"
+                           type="password">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i aria-hidden="true" class="fa fa-lock"></i>
+						</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <label class="txt4"><b>Tipo de Conta</b></label><br>
+                    <div class="input100radio">
+                        <input id="restaurante" name="type" required th:field="*{userTypeEnum}" type="radio"
+                               value="RESTAURANTE">
+                        <label class="txt3" for="restaurante">Restaurante</label><br>
+                    </div>
+                    <div class="input100radio">
+                        <input id="ong" name="type" required th:field="*{userTypeEnum}" type="radio" value="ONG">
+                        <label class="txt3" for="ong">ONG</label>
+                    </div>
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div id="error" style="color: red;" th:if="${error}">
+                    <p style="color: red;" th:text="${error}"></p>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <a class="login100-form-btn" style="color: #FFF; background-color: #6c757d; cursor: pointer"
+                       th:href="@{/auth/login}">
+                        Voltar
+                    </a>
+                    <button class="login100-form-btn" type="submit">
+                        Cadastrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--===============================================================================================-->
+<script th:src="@{/auth/registerUser/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/auth/registerUser/vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{/auth/registerUser/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/auth/registerUser/vendor/select2/select2.min.css}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/auth/registerUser/vendor/tilt/tilt.jquery.min.js}"></script>
+<script>
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+<!--===============================================================================================-->
+<script src="/auth/loginUser/js/main.js"></script>
+
+</body>
+
+</html>
