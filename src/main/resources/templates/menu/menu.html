@@ -14,9 +14,7 @@
     <a th:href="@{/dashboard}">Home</a>
     <a sec:authorize="hasRole('ROLE_RESTAURANTE')" th:href="@{/restaurant/donation}">Doar Alimentos</a>
     <a sec:authorize="hasRole('ROLE_ONG')" th:href="@{/ong/viewdonations}">Visualizar Doações</a>
-    <a sec:authorize="hasRole('ROLE_RESTAURANTE')" th:href="@{/dashboard/statistics}">Ver Estatísticas</a>
-
-
+    
     <a th:href="@{/logout}">Sair</a>
 </div>
 
